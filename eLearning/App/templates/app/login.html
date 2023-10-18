@@ -1,0 +1,131 @@
+{% extends 'app/base.html' %}
+{% block body %} 
+
+<style>
+body {
+    background-color: #f4f4f4;
+}
+
+.container {
+    border-radius: 8px;
+}
+
+.google-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4285F4;
+    color: #ffffff;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.google-btn:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+    transform: translateY(-2px);
+}
+
+.google-icon-wrapper {
+    margin-right: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius: 50%;
+    padding: 2px;
+}
+
+.google-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.btn-text {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.form-control {
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    padding: 10px 12px;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background-color: #4285F4;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: #357ABD;
+}
+
+h3 {
+    font-family: sans-serif;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+h6 {
+    color: #777;
+}
+
+a {
+    color: #4285F4;
+    transition: color 0.3s ease-in-out;
+}
+
+a:hover {
+    color: #357ABD;
+}
+
+</style>
+
+<form method="post" class="container d-flex flex-column justify-content-center card p-5 shadow-sm mt-3" style="max-width: 500px;">
+  {% csrf_token %}
+
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}">{{message}}</div>
+    {% endfor %}
+    {% endif %}
+
+  <h3 class="text-center">Login</h3>
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1">
+    </div>
+    <div class="mb-3 d-flex justify-content-end">
+        <a href="#" style="text-decoration: none;">Forgot Password?</a>
+    </div>
+    <button type="submit" class="btn btn-primary mb-3">Login</button>
+    <h6 class="fw-bold  text-center">Or</h6>
+
+    <div class="google-btn mt-2">
+        <div class="google-icon-wrapper">
+            <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google Logo"/>
+        </div>
+        <p class="btn-text"><b>Sign in with Google</b></p>
+    </div>
+
+    <div class="text-center mt-3">
+      <span>Create a New Account? </span>
+      <a href="{% url 'register' %}" class="text-primary">Sign Up</a>
+    </div>
+
+</form>
+
+{% endblock %}
